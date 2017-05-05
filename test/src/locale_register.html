@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>现场登记</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../font/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/LCalendar.css">
+	</head>
+
+	<body>
+		<div class="all_bigbox">
+			<p>
+				<a href="#">
+					<i class="iconfont one">&#xe601;</i>
+				</a>
+				<span>汉脑访客系统</span>
+				<a href="#">
+					<i class="iconfont two">&#xe61d;</i>
+				</a>
+			</p>
+			<div class="caller_details_top">
+				<img src="../images/客.png" alt="" /><span>访客信息</span>
+			</div>
+			<div class="caller_details_content">
+				<table>
+					<tr>
+						<td><span>姓名：</span><input type="text" name="" id="" value="" /></td>
+					</tr>
+					<tr>
+						<td><span>手机：</span><input type="text" name="" id="" value="" /></td>
+					</tr>
+					<tr>
+						<td><span>公司：</span><input type="text" name="" id="" value="" /></td>
+					</tr>
+					<tr>
+						<td><span>随行：</span><input type="text" name="" id="" value="" /></td>
+					</tr>
+					<tr>
+						<td style="margin-bottom: 0.5rem;">
+							<span id="cp_public_span">车牌：</span>
+							<div class="selectStyle">
+								<select name="" class="select">
+									<option value="">浙</option>
+									<option value="">沪</option>
+									<option value="">皖</option>
+									<option value="">4</option>
+									<option value="">5</option>
+									<option value="">6</option>
+									<option value="">7</option>
+								</select>
+								<i class="iconfont">&#xe627;</i>
+							</div>
+							<input type="text" name="" id="cp_public_input" value=""/>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="caller_details_top">
+				<img src="../images/访.png" alt="" /><span>被访者信息</span>
+			</div>
+			<div class="caller_details_content">
+				<table>
+					<tr>
+						<td><span>公司：</span><input type="text" name="" id="" value="" /></td>
+					</tr>
+					<tr>
+						<td><span>姓名：</span><input type="text" name="" id="" value="" placeholder="试试水"/></td>
+					</tr>
+					<tr>
+						<td>
+							<span style="width: 2.4rem;">天数：</span>
+							<div id="selectStyle">
+								<select name="" id="select" style="padding: 0 0 0 0.5rem;">
+									<option value="">1</option>
+									<option value="">2</option>
+									<option value="">3</option>
+									<option value="">4</option>
+									<option value="">5</option>
+									<option value="">6</option>
+									<option value="">7</option>
+								</select>
+								<i class="iconfont">&#xe627;</i>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><input id="demo3" type="text" readonly="" name="input_date" data-lcalendar="2000-01-01,2018-01-29" style="padding-left: 2.5rem;"/>
+							<i>~</i>
+							<input id="demo4" type="text" readonly="" name="input_date" data-lcalendar="2000-01-01,2018-01-29"/>
+						</td>
+					<tr>
+						<td style="margin-bottom: 0.5rem;"><span style="width: 2rem;">事由: </span><input type="text" name="" id="" value="" style="margin-left: 0.7rem;"/></td>
+					</tr>
+				</table>
+			</div>
+			<button class="caller_details_btn locale_register_btn">申请访问</button>
+			<div class="bottom_box">
+				<div class="register_buttom">
+					<a href="#"><img src="../images/浙江汉脑.png" /></a>
+					<span></span>
+					<a href="#"><img src="../images/鉴真宝.png" /></a>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/demo.js"></script>
+		<script src="../js/jquery-3.2.0.slim.min.js"></script>
+		<script src="../js/index.js"></script>
+		<script src="../js/LCalendar.js"></script>
+		<script>
+		var now = new Date();
+		demo3.value=new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(); 
+		var now = new Date();
+		demo4.value=new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+		$("#select").change(function(){
+			var $date = $("#select option:selected").text();
+			var $$date = new Date().getFullYear() + '/' + (new Date().getMonth() + 1) + '/' + (new Date().getDate());
+			function getNewDay(dateTemp, days) {
+			    var dateTemp = dateTemp.split("-");
+			    var nDate = new Date(dateTemp[1] + '/' + dateTemp[2] + '/' + dateTemp[0]); //转换为MM-DD-YYYY格式    
+			    var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+			    var rDate = new Date(millSeconds);
+			    var year = rDate.getFullYear();
+			    var month = rDate.getMonth() + 1;
+			    var date = rDate.getDate();
+			    return (year + "-" + month + "-" + date);
+			};
+			$('#demo4').val(getNewDay($$date,$date));
+		});
+   
+
+		
+
+		</script>
+	</body>
+
+</html>
+

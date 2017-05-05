@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>记录</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
+		<link rel="stylesheet" href="../css/mui.min.css">
+		
+	</head>
+	<body>
+		<div class="all_bigbox" style="height: 3rem;">
+			<p>
+				<a href="#">
+					<i class="iconfont one">&#xe601;</i>
+				</a>
+				<span>汉脑访客系统</span>
+				<a href="#">
+					<i class="iconfont two">&#xe61d;</i>
+				</a>
+			</p>
+
+			<!--<div class="bottom_box record_bottom_box">
+				<div class="register_buttom">
+					<a href="#"><img src="../images/浙江汉脑.png"/></a>
+					<span></span>
+					<a href="#"><img src="../images/鉴真宝.png"/></a>
+				</div>
+			</div>-->
+			<div class="bottom_box public_bottom_style" style="z-index: 99;">
+				<div class="register_buttom">
+					<a href="#"><img src="../images/浙江汉脑.png" /></a>
+					<span></span>
+					<a href="#"><img src="../images/鉴真宝.png" /></a>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/demo.js"></script>
+		<script src="../js/jquery-3.2.0.slim.min.js"></script>
+		<script src="../js/index.js"></script>
+
+		<script type="text/javascript">
+		//启用双击监听
+		mui.init({
+			gestureConfig:{
+				doubletap:true
+			},
+			subpages:[{
+				url:'iframe.html',
+				id:'iframe.html',
+				styles:{
+					top: '40px',
+					bottom: '40px',
+				}
+			}]
+		});
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap',function () {
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		});
+	</script>
+	</body>
+</html>
+
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>记录</title>
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../font/iconfont.css"/>
+
+		<title></title>
+		<style type="text/css">
+		.content_li{
+            border-bottom: 1px solid #F1F1F1;
+            margin-top: 1rem;
+            padding-bottom: 0.5rem;
+        }
+        a{
+        	display: flex; 
+            display: -webkit-flex; 
+            align-items: center;
+            justify-content: space-between;
+        }
+        img{
+            height: 2rem;
+        }
+        .record_content{
+        padding-left: 0;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        border-top: 1px solid #7D8288;
+        }
+        #pullrefresh{
+        	background: url(../images/bg.png) no-repeat;
+        	background-size: cover;
+/*		    background-size: cover;
+		    min-height: 100%;
+		    position: relative;*/
+        }
+        p{
+        	margin: 0;
+        	color: #F1F1F1;
+        }
+        .p_color{
+        	color: #5FA9FF;
+        }
+		</style>
+	</head>
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron record_content" style="background-color: inherit;">
+					
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.content_li');
+					for (var i = cells.length, len = i + 3; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'content_li';
+						li.innerHTML = '<a href="#"><p><span>周五</span><br /><span>03-24</span></p><img src="../images/访.png"/><p>龙士达</p><p>方大</p><p class="pp_color p_color">授权通过</p></a>';
+						//下拉刷新，新纪录插到最前面；
+						table.insertBefore(li, table.firstChild);
+					}
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.content_li');
+					for (var i = cells.length, len = i + 5; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'content_li';
+						li.innerHTML = '<a href="#"><p><span>周五</span><br /><span>03-24</span></p><img src="../images/访.png"/><p>龙士达</p><p>方大</p><p class="pp_color p_color">授权通过</p></a>';
+						table.appendChild(li);
+					}
+				}, 1500);
+			}
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 1000);
+
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+		</script>
+	</body>
+</html>
